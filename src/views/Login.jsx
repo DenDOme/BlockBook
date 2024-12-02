@@ -1,19 +1,47 @@
 import github from '../assets/imgs/github-mark-white.svg'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../store/slices/authSlice';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 function Login(){
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const from = location.state?.from?.pathname || "/";
+    const from = "/";
+
+    useEffect(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const codeParam = urlParams.get("code");
+
+        if(codeParam && (Cookies.get('token') == null)){
+            const backendUrl = import.meta.env.VITE_BACKEND_URL
+            async function getAccessToken(){
+                await fetch(`${backendUrl}/getAccessToken?code=${codeParam}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json", 
+                    },
+                }).then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    if(data.token){
+                        const token = data.token; 
+                        dispatch(setToken(token));
+                        navigate(from, { replace: true });
+                    }
+                })
+            }
+
+            getAccessToken();
+        }
+    }, []);
 
     const handleLogin = () => {
-        const token = "example-access-token"; 
-        dispatch(setToken(token));
-        navigate(from, { replace: true });
+        const clientId = import.meta.env.VITE_CLIENT_ID;
+        window.location.assign(`https://github.com/login/oauth/authorize?client_id=${clientId}&scope=repo`);
     }
 
     return (
