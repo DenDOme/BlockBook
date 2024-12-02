@@ -1,12 +1,12 @@
-
+import FileList from "../components/fileList";
 
 function Home(){
 
 
     return (
-        <h1 className="">
-            
-        </h1>
+        <>
+            <FileList />
+        </>
     )
 }
 
