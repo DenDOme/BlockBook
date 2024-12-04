@@ -2,6 +2,7 @@ import github from '../assets/imgs/github-mark-white.svg'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../store/slices/authSlice';
+import { setRepo } from '../store/slices/repoSlice';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
@@ -28,8 +29,8 @@ function Login(){
                     return response.json();
                 }).then((data) => {
                     if(data.token){
-                        const token = data.token; 
-                        dispatch(setToken(token));
+                        dispatch(setToken(data.token));
+                        dispatch(setRepo(data.repo));
                         navigate(from, { replace: true });
                     }
                 })

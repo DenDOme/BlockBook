@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addfiles, removefiles, getfiles, clearfiles  } from "../store/slices/fileSlice";
+import { addfiles, removefiles} from "../store/slices/fileSlice";
 import { addTab } from "../store/slices/tabSlice";
 import { clearToken } from "../store/slices/authSlice";
 import addItemIcon from '../assets/imgs/icons/add-item.svg'
@@ -22,7 +22,6 @@ function FileList(){
     }
 
     const handleAddTab = (element) => {
-
         dispatch(addTab(element));
     };
 

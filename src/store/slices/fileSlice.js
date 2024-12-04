@@ -10,7 +10,7 @@ const fileSlice = createSlice({
         removefiles: (state, action) => {
             state.files = state.files.filter(file => {file.id !== action.payload.id});
         },
-        getfiles: (state, action) => {
+        setfiles: (state, action) => {
             state.files = action.payload;
         },
         clearfiles: (state) => {
@@ -19,5 +19,5 @@ const fileSlice = createSlice({
     }
 })
 
-export const { addfiles, removefiles, getfiles, clearfiles } = fileSlice.actions;
+export const { addfiles, removefiles, setfiles, clearfiles } = fileSlice.actions;
 export default fileSlice.reducer;

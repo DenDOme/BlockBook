@@ -8,7 +8,10 @@ function TabsList(){
     const activeTab = useSelector((state) => state.tab.activeTab)
 
     const handleChangeActiveTab = (id) => {
-        dispatch(changeTab(id));
+        console.log("arg id",id);
+        console.log("tabs",tabs);
+        console.log("active tab id",activeTab);
+        dispatch(changeTab({id}));
     }
 
     const handleDeleteTab = (id) => {
@@ -20,7 +23,6 @@ function TabsList(){
 
             {tabs.map((element, index) => {
                 const isActive = activeTab === element.id;
-
                 return (
                     <div key={index} className={`mt-[12px] h-[30px] flex items-center justify-between w-[200px] px-5 rounded-tl-[20px] rounded-tr-[20px] ${isActive ? 'bg-darkGray' : ''}`}>
                         <button
