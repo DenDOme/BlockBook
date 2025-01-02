@@ -8,9 +8,6 @@ function TabsList(){
     const activeTab = useSelector((state) => state.tab.activeTab)
 
     const handleChangeActiveTab = (id) => {
-        console.log("arg id",id);
-        console.log("tabs",tabs);
-        console.log("active tab id",activeTab);
         dispatch(changeTab({id}));
     }
 

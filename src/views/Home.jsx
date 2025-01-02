@@ -48,8 +48,6 @@ function Home(){
                 const repo = repository.name;
                 const token = userToken;
 
-                console.log(owner, repo, token);
-
                 const response = await fetch(
                     `${backendUrl}/getAllFiles?owner=${owner}&repo=${repo}&token=${token}`
                 );
@@ -59,8 +57,7 @@ function Home(){
                 }
 
                 const data = await response.json();
-                dispatch(setfiles(data));
-                console.log(data);
+                dispatch(setfiles(data.files));
             } catch (error) {
                 console.error("Error fetching repository files: ", error);
             }
