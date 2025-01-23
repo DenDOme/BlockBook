@@ -23,9 +23,19 @@ const tabSlice = createSlice({
         },
         changeTab: (state, action) => {
             state.activeTab = action.payload.id;
+        },
+
+        changeTabContent: (state, action) => {
+            const existingTab = state.tabs.find(tab => tab.id === action.payload.id);
+            
+            if (existingTab) {
+                existingTab.content = action.payload.content;
+            } else {
+                console.warn(`Tab with id ${action.payload.id} not found.`);
+            }
         }
     }
 })
 
-export const { addTab, removeTab, clearTabs, changeTab } = tabSlice.actions
+export const { addTab, removeTab, clearTabs, changeTab, changeTabContent } = tabSlice.actions
 export default tabSlice.reducer

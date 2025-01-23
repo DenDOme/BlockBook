@@ -66,6 +66,12 @@ function Home(){
         fetchFiles();
     }, [repository, userToken]);
 
+    document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+            event.preventDefault(); 
+        }
+    });
+
     return (
         <div className="flex w-[100vw] h-[100vh]">
             <FileList />
